@@ -1,15 +1,11 @@
-import { YStack, H2, Separator, Theme } from 'tamagui';
-
-import EditScreenInfo from '../../components/edit-screen-info';
+import React from 'react';
+import { YStack } from 'tamagui';
+import Content from '~/components/Content';
 
 export default function TabOneScreen() {
   return (
-    <Theme name="light">
-      <YStack flex={1} alignItems="center" justifyContent="center">
-        <H2>Tab One</H2>
-        <Separator />
-        <EditScreenInfo path="app/(tabs)/index.tsx" />
-      </YStack>
-    </Theme>
+    <YStack backgroundColor={'$yellow1Light'} flex={1}>
+      <Content />
+    </YStack>
   );
 }

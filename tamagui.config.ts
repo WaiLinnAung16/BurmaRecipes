@@ -3,7 +3,7 @@ import { createInterFont } from '@tamagui/font-inter';
 import { createMedia } from '@tamagui/react-native-media-driver';
 import { shorthands } from '@tamagui/shorthands';
 import { themes, tokens } from '@tamagui/themes';
-import { createTamagui, styled, SizableText, H1, YStack } from 'tamagui';
+import { createTamagui, styled, YStack, H4, H3 } from 'tamagui';
 
 const animations = createAnimations({
   bouncy: {
@@ -40,14 +40,14 @@ export const Main = styled(YStack, {
   maxWidth: 960,
 });
 
-export const Title = styled(H1, {
-  color: '#000',
-  size: '$12',
+export const Title = styled(H3, {
+  color: '$gray1Dark',
+  fontWeight: 'bold',
 });
 
-export const Subtitle = styled(SizableText, {
-  color: '#38434D',
-  size: '$9',
+export const Subtitle = styled(H4, {
+  color: '$gray1Dark',
+  fontWeight: 'bold',
 });
 
 const config = createTamagui({

@@ -1,6 +1,8 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
+import { color, colorTokens } from '@tamagui/themes';
+import { Link, Tabs, router } from 'expo-router';
 import { Pressable, StyleSheet } from 'react-native';
+import { Text } from 'tamagui';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -13,13 +15,20 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: 'black',
+        tabBarActiveTintColor: `${color.yellow7Light}`,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: `${color.yellow2Dark}`,
+        },
+        headerStyle: { backgroundColor: `${color.yellow4Dark}` },
+        headerTintColor: 'white',
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'BURMA RECIPES',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerTintColor: `${color.yellow7Light}`,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -43,6 +52,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
+      <Tabs.Screen name="(detail)/[id]" options={{ href: null, title:'Detail' }} />
     </Tabs>
   );
 }

@@ -1,7 +1,7 @@
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import React, { useEffect } from 'react';
-import { TamaguiProvider } from 'tamagui';
+import { TamaguiProvider, Theme } from 'tamagui';
 
 import config from '../tamagui.config';
 
@@ -14,7 +14,7 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
+    Inter: require('../assets/fonts/Padauk-Regular.ttf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   });
 
@@ -28,10 +28,12 @@ export default function RootLayout() {
 
   return (
     <TamaguiProvider config={config}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
+      <Theme name={'yellow_alt1'}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        </Stack>
+      </Theme>
     </TamaguiProvider>
   );
 }

@@ -45,7 +45,7 @@ const Content = () => {
             ml={'$3'}
             mr={'$1'}
             marginVertical={'$2'}
-            bc={'$gray3Light'}
+            bc={'$yellow1Light'}
             boc={'$yellow7Light'}
             color={'#000'}
             fontWeight={'bold'}

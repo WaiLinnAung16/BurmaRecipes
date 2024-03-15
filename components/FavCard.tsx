@@ -9,23 +9,16 @@ import { Subtitle } from '~/tamagui.config';
 
 const FavCard = ({
   item,
-  favRecipes,
-  setFavRecipes,
+
 }: {
   item: RecipeType;
-  favRecipes: RecipeType[];
-  setFavRecipes: React.Dispatch<React.SetStateAction<RecipeType[]>>;
+
 }) => {
   const imageUri = Images.find((img) => img.name === item.Name);
 
-  const removeFav = async () => {
-    const updatedRecipes = favRecipes.filter((recipe) => recipe?.Guid !== item?.Guid);
-    await AsyncStorage.setItem('favRecipes', JSON.stringify(updatedRecipes));
-    setFavRecipes(updatedRecipes);
-  };
 
   return (
-    <View bc={'$yellow1Light'} padding={'$3'} borderRadius={'$3'}>
+    <View bc={'$gray5Light'} padding={'$3'} borderRadius={'$3'}>
       <XStack space ai={'center'}>
         <View borderRadius={'$4'} overflow="hidden">
           {imageUri ? (
@@ -44,13 +37,6 @@ const FavCard = ({
                 Cook Now
               </Button>
             </Link>
-            <Button
-              width={'$5'}
-              size={'$3'}
-              circular
-              icon={() => <Ionicons name="heart-sharp" size={23} color={'#EFD36C'} />}
-              onPress={() => removeFav()}
-            />
           </XStack>
         </YStack>
       </XStack>

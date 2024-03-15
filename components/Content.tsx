@@ -87,6 +87,7 @@ const Content = () => {
         </XStack>
       </View>
       <FlatList
+        windowSize={10}
         data={filteredData}
         horizontal={false}
         numColumns={2}

@@ -24,7 +24,6 @@ const index = () => {
         setFav(false);
       } else {
         const items = [...favRecipes, detail];
-        console.log(items);
         await AsyncStorage.setItem('favRecipes', JSON.stringify(items));
         setFav(true);
       }
@@ -75,7 +74,7 @@ const index = () => {
           </View>
           <Ionicons
             name={`${fav ? 'heart-sharp' : 'heart-outline'}`}
-            size={26}
+            size={30}
             color={`${color.yellow8Light}`}
             onPress={() => addFav()}
           />

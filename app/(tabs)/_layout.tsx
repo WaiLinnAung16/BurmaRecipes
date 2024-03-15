@@ -1,7 +1,8 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { color,  } from '@tamagui/themes';
-import {  Tabs,  } from 'expo-router';
-import {  StyleSheet } from 'react-native';
+import { color } from '@tamagui/themes';
+import { Tabs } from 'expo-router';
+import { StyleSheet } from 'react-native';
+import MyTabBar from '~/components/MyTabBar';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -17,10 +18,13 @@ export default function TabLayout() {
         tabBarActiveTintColor: `${color.yellow7Light}`,
         tabBarShowLabel: false,
         tabBarStyle: {
+          borderTopStartRadius:20,
+          borderTopEndRadius:20,
           backgroundColor: `${color.yellow2Dark}`,
         },
         headerStyle: { backgroundColor: `${color.yellow4Dark}` },
         headerTintColor: 'white',
+        tabBarHideOnKeyboard: true,
       }}>
       <Tabs.Screen
         name="index"

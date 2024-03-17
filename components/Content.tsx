@@ -15,7 +15,6 @@ const Content = () => {
 
   const selectUser = (userType: string) => {
     setSelectUserType(userType);
-    console.log(userType);
   };
 
   const filterData = () => {

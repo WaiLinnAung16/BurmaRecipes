@@ -14,12 +14,12 @@ const index = () => {
   const detail: RecipeType | undefined = data.find((el) => el.Guid === id);
   const imageSrc = Images.find((el) => el.name === detail?.Name);
   const [favRecipes, setFavRecipes] = useState<RecipeType[]>([]);
-  const [fav, setFav] = useState<Boolean>(false);
+  const [fav, setFav] = useState<Boolean>();
 
   const addFav = async () => {
     try {
-      if (favRecipes.some((recipe) => recipe?.Guid === detail?.Guid)) {
-        const updatedRecipes = favRecipes.filter((recipe) => recipe?.Guid !== detail?.Guid);
+      if (favRecipes?.some((recipe) => recipe?.Guid === detail?.Guid)) {
+        const updatedRecipes = favRecipes?.filter((recipe) => recipe?.Guid !== detail?.Guid);
         await AsyncStorage.setItem('favRecipes', JSON.stringify(updatedRecipes));
         setFav(false);
       } else {
@@ -46,7 +46,7 @@ const index = () => {
   useFocusEffect(
     useCallback(() => {
       getFav();
-    }, [])
+    }, [fav])
   );
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const index = () => {
     } else {
       setFav(false);
     }
-  }, [detail, favRecipes]);
+  }, [id]);
 
   return (
     <ScrollView padding={'$3'}>

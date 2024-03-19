@@ -7,15 +7,8 @@ import { Images } from '~/data/Images';
 import { RecipeType } from '~/interfaces/data';
 import { Subtitle } from '~/tamagui.config';
 
-const FavCard = ({
-  item,
-
-}: {
-  item: RecipeType;
-
-}) => {
+const FavCard = ({ item }: { item: RecipeType }) => {
   const imageUri = Images.find((img) => img.name === item.Name);
-
 
   return (
     <View bc={'$gray5Light'} padding={'$3'} borderRadius={'$3'}>

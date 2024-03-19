@@ -1,62 +1,47 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import data from '../../../data/Recipes.json';
-import { H1, H3, H4, Image, ScrollView, Separator, Text, View, XStack, YStack } from 'tamagui';
+import { Image, ScrollView, Separator, Text, View, XStack, YStack } from 'tamagui';
 import { Images } from '~/data/Images';
 import { Subtitle, Title } from '~/tamagui.config';
 import { Ionicons } from '@expo/vector-icons';
 import { color } from '@tamagui/themes';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RecipeType } from '~/interfaces/data';
+import useAsyncStorage from '~/hooks/useAsyncStorage';
 
+// Functional component for recipe detail screen
 const index = () => {
-  const { id }: { id: string } = useLocalSearchParams();
-  const detail: RecipeType | undefined = data.find((el) => el.Guid === id);
-  const imageSrc = Images.find((el) => el.name === detail?.Name);
-  const [favRecipes, setFavRecipes] = useState<RecipeType[]>([]);
-  const [fav, setFav] = useState<Boolean>();
+  const { id }: { id: string } = useLocalSearchParams(); // Retrieving recipe ID from local search parameters
+  const { data: favRecipes, getData, setData } = useAsyncStorage('favRecipes'); // call custom hook asyncStoarge
 
-  const addFav = async () => {
-    try {
-      if (favRecipes?.some((recipe) => recipe?.Guid === detail?.Guid)) {
-        const updatedRecipes = favRecipes?.filter((recipe) => recipe?.Guid !== detail?.Guid);
-        await AsyncStorage.setItem('favRecipes', JSON.stringify(updatedRecipes));
-        setFav(false);
-      } else {
-        const items = [...favRecipes, detail];
-        await AsyncStorage.setItem('favRecipes', JSON.stringify(items));
-        setFav(true);
-      }
-    } catch (error) {
-      alert(error);
-    }
+  const detail: RecipeType | undefined = data.find((el) => el.Guid === id); // Finding the recipe detail based on ID
+  const imageSrc = Images?.find((el) => el.name === detail?.Name); // Retrieving image source for the recipe
+
+  const [fav, setFav] = useState<Boolean>(false); // State for checking if the current recipe is favorited
+
+  // Function to add/remove favorite recipe
+  const addFav = () => {
+    setData(detail);
+    setFav((prev) => !prev);
   };
 
-  const getFav = async () => {
-    try {
-      const items = await AsyncStorage.getItem('favRecipes');
-      if (items !== null) {
-        setFavRecipes(JSON.parse(items));
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
-
+  // Using useFocusEffect hook to call getFav function when screen gains focus or favorite status changes
   useFocusEffect(
     useCallback(() => {
-      getFav();
+      getData();
     }, [fav])
   );
 
+  // useEffect hook to update favorite status when ID changes
   useEffect(() => {
     if (favRecipes.some((recipe) => recipe?.Guid === detail?.Guid)) {
-      setFav(true);
+      setFav(true); // Setting favorite state to true if recipe is in favorites
     } else {
-      setFav(false);
+      setFav(false); // Setting favorite state to false if recipe is not in favorites
     }
   }, [id]);
 
+  // Rendering recipe detail screen
   return (
     <ScrollView padding={'$3'}>
       <YStack gap={'$3'} marginBottom={'$10'}>
@@ -66,22 +51,24 @@ const index = () => {
               <Image source={{ uri: imageSrc?.img }} width={'100%'} height={'100%'} />
             ) : (
               <Image
-                source={{ uri: require('../../../assets/img/default.png') }}
+                source={{ uri: require('../../../assets/img/default.png') }} // Default image source if image not found
                 width={'100%'}
                 height={'100%'}
               />
             )}
           </View>
           <Ionicons
-            name={`${fav ? 'heart-sharp' : 'heart-outline'}`}
+            name={`${fav ? 'heart-sharp' : 'heart-outline'}`} // Conditional rendering of heart icon based on favorite status
             size={30}
             color={`${color.yellow8Light}`}
-            onPress={() => addFav()}
+            onPress={() => addFav()} // Adding/removing recipe from favorites on icon press
           />
         </XStack>
+
         <Separator borderStyle="dashed" />
         <Title>{detail?.Name}</Title>
         <Separator borderStyle="dashed" />
+
         <Subtitle>📃 ပါဝင်ပစ္စည်းများ</Subtitle>
         <View backgroundColor={'$gray5Light'} padding={'$3'} borderRadius={'$3'}>
           <Text lineHeight={'$1'}>{detail?.Ingredients}</Text>
@@ -96,4 +83,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default index; // Exporting the component

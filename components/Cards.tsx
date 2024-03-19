@@ -1,5 +1,5 @@
 import { LinearGradient } from 'tamagui/linear-gradient';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card, Image, Paragraph } from 'tamagui';
 import { RecipeType } from '~/interfaces/data';
 import { Images } from '~/data/Images';
@@ -54,12 +54,6 @@ const Cards = ({ item }: CradsProps) => {
               resizeMode="cover"
             />
           )}
-          <Image
-            source={{ uri: imageUri ? imageUri.img : require('../assets/img/default.png') }}
-            width={'100%'}
-            height={'100%'}
-            resizeMode="cover"
-          />
         </Card.Background>
       </LinearGradient>
     </Card>

@@ -40,7 +40,7 @@ export default function FavouriteScreen() {
 
   return (
     <YStack flex={1} space jc={'space-between'} padding={'$3'}>
-      <ScrollView horizontal={false} contentContainerStyle={{gap:14}}>
+      <ScrollView horizontal={false} contentContainerStyle={{ gap: 14 }}>
         {favRecipes.map((el) => (
           <FavCard key={el.Guid} item={el} />
         ))}

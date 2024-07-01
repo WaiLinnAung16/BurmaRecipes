@@ -33,7 +33,12 @@ const Cards = ({ item }: CradsProps) => {
           tint="dark"
           style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 50 }}>
           <Card.Footer padding={0}>
-            <Paragraph fontWeight={'bold'} color={'$gray1Light'} padding={'$3'} userSelect="none">
+            <Paragraph
+              numberOfLines={2}
+              fontWeight={'bold'}
+              color={'$gray1Light'}
+              padding={'$3'}
+              userSelect="none">
               {item.Name}
             </Paragraph>
           </Card.Footer>

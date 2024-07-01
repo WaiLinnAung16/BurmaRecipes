@@ -8,10 +8,9 @@ import { AntDesign } from '@expo/vector-icons';
 import Category from '../../components/Category';
 
 export default function Main() {
-  
-  const [selectUserType, setSelectUserType] = useState(''); 
-  const [search, setSearch] = useState(''); 
-  const [filteredData, setfilteredData] = useState<RecipeType[]>([]); 
+  const [selectUserType, setSelectUserType] = useState('');
+  const [search, setSearch] = useState('');
+  const [filteredData, setfilteredData] = useState<RecipeType[]>([]);
   const inputRef = useRef<TextInput>(null);
 
   // Function to handle focusing input and clearing search
@@ -81,6 +80,7 @@ export default function Main() {
         renderItem={({ item }) => <Cards item={item} />}
         keyExtractor={(item) => item.Guid}
         contentContainerStyle={{ paddingBottom: 30 }}
+        keyboardDismissMode="on-drag"
       />
     </YStack>
   );
